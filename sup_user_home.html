@@ -1,0 +1,612 @@
+<html>
+
+  <style>
+  .current_user{
+    border-radius:50%;
+    width:100px;
+    height:100px;
+    border:solid;
+    border-color:#EBEAEA;
+  }
+  .dropdown-menu{
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"
+  }
+  .social{
+    border:none;
+  }
+  .delete_account{
+    border:solid;
+    border-radius:5px;
+    border-color:#FF1A1A;
+    border-width:2px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:#FF1A1A
+  }
+  .delete_account:hover{
+    color:white;
+    background-color: #FF1A1A;
+  }
+
+  .custom-file{
+    display: none;
+  }
+  .plain_image:hover  .custom-file{
+  display: inline-block;
+  }
+  #new_custom_file{
+    border:solid;
+    border-width:2px;
+    border-color:#1D66ED;
+    padding-top:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom:5px;
+    border-radius:20px;
+    color:#1D66ED;
+
+  }
+  #new_custom_file:hover{
+    background-color: #1D66ED;
+    color:white;
+  }
+  .upload_button{
+    background-color: #1D66ED;
+    color:white;
+    border:none;
+    border-radius:20px;
+
+  }
+  input[type='text']{
+
+    padding-top:5px;
+    width:320px;
+    padding-bottom:5px;
+    border-width:1.2px;
+    border: 0;
+    border-bottom: 2.5px solid #1F59CD
+  }
+  input[type='text']:focus{
+    outline: none;
+  }
+  .access_button{
+    background-color: #1554D3;
+    border:none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:100px;
+    height:37px;
+    border-radius: 30px;
+    color:white;
+  }
+  .access_button:hover{
+    background-color:#647CFF;
+  }
+  .current_user_card{
+    -webkit-box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+    border:solid;
+    border-width:1px;
+    border-radius: 7px;
+    border-color:#E9E9E9;
+    width:450px;
+
+  }
+  .top_bar{
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+  }
+  .card_user_avatar{
+    border-radius:10%;
+    width:170px;
+    height:170px;
+    text-align: center;
+    border:solid;
+    border-width:2px;
+    border-color:#E9E9E9;
+    margin-top:-50px;
+  }
+  .username{
+    font-family: 'Fira Sans', sans-serif;
+    font-size:27px;
+  }
+  .my_social_links{
+    background-color: #C4C4C4;
+    height:70px;
+    width:auto;
+    -webkit-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 14px -1px rgba(0,0,0,0.75);
+  }
+  .my_social_links:hover{
+    background-color: #DCDBDB
+  }
+  .owner_top_bar{
+    height:170px;
+    width:auto;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+
+  }
+  .user_owner_profile{
+    width:800px;
+    height:600px;
+    border:solid;
+    border-width:1px;
+    border-color:#DCDBDB;
+    border-radius:7px;
+    -webkit-box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+box-shadow: 3px 4px 9px -1px rgba(0,0,0,0.75);
+  }
+  .owner_user_avatar{
+    width:200px;
+    height:200px;
+    border-radius:7px;
+    border:solid;
+    border-width:1px;
+    border-color:#DCDBDB;
+    margin-top:-30px;
+  }
+  .invite_user{
+    background-color: #1554D3;
+    border:none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:200px;
+    height:37px;
+    border-radius: 30px;
+    color:white;
+  }
+  .invite_user:hover{
+    background-color:#647CFF;
+  }
+  .channel_listing{
+    width:900px;
+    height:auto;
+
+  }
+  .joined_rooms{
+    min-height:50%;
+    max-height:50%;
+    border-top:solid;
+    border-top-width:1px;
+    border-top-color: #D3D3D3;
+  }
+  .created_rooms{
+    min-height: 50%;
+    max-height: 50%;
+    border-top:solid;
+    border-top-width:1px;
+    border-top-color: #D3D3D3;
+    overflow: scroll;
+  }
+  .information_text{
+    margin-top:15px;
+    font-size:16px;
+    font-family: 'Fira Sans', sans-serif;
+  }
+  .none_found{
+    font-size:30px;
+    font-family: 'Fira Sans', sans-serif;
+    color:#D1D1D1;
+  }
+  .create_room_button{
+    background-color: #1554D3;
+    border:none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:180px;
+    height:37px;
+    border-radius: 30px;
+    color:white;
+    font-family: 'Fira Sans', sans-serif;
+  }
+  .create_room_button:hover{
+    background-color:#647CFF;
+  }
+  .create_room_panel{
+    background-color: #1554D3;
+    border:none;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    width:100px;
+    height:37px;
+    border-radius: 30px;
+    color:white;
+    font-family: 'Fira Sans', sans-serif;
+  }
+  .create_room_panel:hover{
+    background-color:#647CFF;
+  }
+  .error_class{
+    font-size:13.7px;
+    margin-left:20px;
+    color:red;
+    font-family: 'Fira Sans', sans-serif;
+  }
+  .chat_listing{
+    font-family: 'Fira Sans', sans-serif;
+  }
+  </style>
+  <header>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Sunflower:300" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script defer="" src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+  </header>
+  <body>
+
+    <div class='spacer' style='height:40px;'></div>
+    <div class="container">
+  <div class="row">
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class="col"></div>
+    <div class='col'>
+      <div class="dropdown" style='float:right'>
+        {%if current.avatar_by_url%}
+          <button class="current_user" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-image:url('{{current.avatar}}');width:100px;height:100px;background-size:cover;">
+        {%else%}
+          <button class="current_user" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-image:url(/static/{{current.avatar}});width:100px;height:100px;background-size:cover;">
+        {%endif%}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style='text-align:center;'>
+          <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModalCenter">Edit profile</a>
+          <a class="dropdown-item" href="#">Messages</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/logout"><strong>Logout</strong></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-body" style='width:900px;'>
+        <div class='container'>
+            <div class='row'>
+              <div class='col'>
+                <button class='delete_account'>Delete account</button>
+                <div class='spacer' style='height:10px;'></div>
+                <div class='options'></div>
+                <p>Add a social link to profile:</p>
+                <div class='social_links'>
+                {%for l in current.social_links%}
+                  <button class='social' id='{{l.id}}'>
+                    <i class="{{l.icon}}"></i>
+                  </button>
+                {%endfor%}
+                <div class='input_boxes_place'></div>
+
+              </div>
+              </div>
+
+
+              <div class='col'>
+                {%if current.avatar_by_url%}
+                  <div class='plain_image' style="background-image:url('{{current.avatar}}');width:170px;height:170px;background-size:cover;border-radius:50%;border:solid:border-width:2px;border-color:#EBEAEA">
+                {%else%}
+                  <div class='plain_image' style="background-image:url(/static/{{current.avatar}});width:170px;height:170px;background-size:cover;border-radius:50%;border:solid:border-width:2px;border-color:#EBEAEA">
+                {%endif%}
+                      <div class="custom-file" style='text-align:center;margin-top:30px;'>
+                        <form method=post action='/change-avatar' enctype=multipart/form-data>
+                          <input type="file" class="custom-file-input" id="customFile" name='file'>
+                          <label class="custom-file-label" for="customFile" id='new_custom_file'>Change avatar</label>
+                          <input type=submit value=Upload class='upload_button'>
+                        </form>
+                      </div>
+                    </button>
+                  </div>
+                  <a href='/revert_to_gravatar' style='margin-left:20px;'>Revert to Gravatar</a>
+              </div>
+
+            </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+          <p style='text-align:left;color:##8AABE8;font-size:15px;'>Seems sparse? We are currently adding new features, and you can recommend any <a href='/new_features'>here</a></p>
+          <div class='spacer' style='width:60px;'></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class='spacer' style='height:50px;'></div>
+  {%if user.id == current.id%}
+  <div class='container'>
+    <div class='row'>
+      <div class='col-6'>
+        <div class='current_user_card' style='text-align:center'>
+          <div class='top_bar' style="background-image:url(/static/{{current.cover_avatar}});width:auto;height:200px;background-size:cover;">
+            <div class="custom-file" style='text-align:center;margin-top:30px;'>
+              <a href='/delete_cover_photo' style='color:white'><small>Revert to default cover</small></a>
+
+              <form method='POST' action='/change-cover-avatar' enctype=multipart/form-data>
+                <input type="file" class="custom-file-input" id="customFile1" name='file'>
+                <label class="custom-file-label" for="customFile1" id='new_custom_file' style='color:white'>Change cover photo</label>
+                <input type=submit value=Upload class='upload_button'>
+              </form>
+            </div>
+          </div>
+            <div class='container'>
+              <div class='row'>
+                  <div class='col'></div>
+                  <div class='col' style='text-align:center'>
+                    {%if current.avatar_by_url%}
+                      <div class='card_user_avatar' style="background-image:url('{{current.avatar}}');background-size:cover;"></div>
+                    {%else%}
+                      <div class='card_user_avatar' style="background-image:url(/static/{{current.avatar}});background-size:cover;"></div>
+                    {%endif%}
+                    <div class='spacer' style='height:20px;'></div>
+                    <p class='username'>@{{current.username}}</p>
+
+
+                  </div>
+                  <div class='col'></div>
+
+              </div>
+            </div>
+            <div class='spacer' style='height:30px;'></div>
+            <i class="fas fa-envelope" style='font-size:1.5em'></i> <a href='mailto:{{current.email}}'><span class='username' style='font-size:18px'><u>{{current.email}}</u></span></a>
+            <div class='spacer' style='height:100px;'></div>
+            <div class='container'>
+              <div class='row'>
+                {%for l in current.social%}
+                  <div class='col my_social_links'>
+                    <a href='{{l.link}}' style='color:white;text-decoration:none;'><i class="{{l.icon}}" style='font-size:2em;margin-top:20px;'></i></a>
+                  </div>
+                {%endfor%}
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <div class='col col-lg-6 channel_listing'>
+        <div class='joined_rooms'>
+          <p class='information_text'><strong>Joined Rooms</strong></p>
+          <div class='spacer' style='height:20px;'></div>
+          {%if current.joined_channels%}
+          <table>
+            {%for channel in current.joined_channels%}
+            <tr>
+              <td style='padding-top:30px;'>
+                {%if channel.has_avatar%}
+                  <div class='avatar'></div>
+                {%else%}
+
+                  <div class='channel_avatar' style='color:white;font-size:16px;background-color:{{channel.channel_shield_color}};width:90px;height:90px;border-radius:50%;'>
+                    <p style='padding-top:24px;margin-left:37px;font-size:34px;'>{{channel.channel_abbreviation}}</p>
+                  </div>
+                {%endif%}
+              </td>
+
+              <td style='padding-left:20px;padding-top:30px;'>
+
+                  <a href='{{channel.href}}' style='color:black;font-size:22px;' class='chat_listing'><strong>#{{channel.channel_name}}</strong></a>
+                  {%if channel.length == 1%}
+                    <p>1 person</p>
+                  {%else%}
+                    <p>{{channel.length}} people</p>
+
+                  {%endif%}
+                  <!--<a href='{{channel.manage_href}}'><i class="fas fa-edit"></i><small>manage</small></a>-->
+
+                <td>
+
+              </tr>
+
+              <div class='spacer' style='height:20px;'></div>
+            {%endfor%}
+          </table>
+          {%else%}
+          <p class='none_found'><em>You have not joined any rooms</em></p>
+          {%endif%}
+        </div>
+        <div class='created_rooms'>
+          <p class='information_text' style='font-size:18px;'><strong>Created Rooms</strong></p>
+          {%if current.owned_channels%}
+            <table>
+            {%for channel in current.owned_channels%}
+                <tr>
+                  <td style='padding-top:30px;'>
+                    {%if channel.has_avatar%}
+                      <div class='avatar'></div>
+                    {%else%}
+
+                      <div class='channel_avatar' style='color:white;font-size:16px;background-color:{{channel.channel_shield_color}};width:90px;height:90px;border-radius:50%;'>
+                        <p style='padding-top:24px;margin-left:37px;font-size:34px;'>{{channel.channel_abbreviation}}</p>
+                      </div>
+                    {%endif%}
+                  </td>
+
+                  <td style='padding-left:20px;padding-top:30px;'>
+
+                      <a href='{{channel.href}}' style='color:black;font-size:22px;' class='chat_listing'><strong>#{{channel.channel_name}}</strong></a>
+                      {%if channel.length == 1%}
+                        <p>1 person</p>
+                      {%else%}
+                        <p>{{channel.length}} people</p>
+
+                      {%endif%}
+                      <!--<a href='{{channel.manage_href}}'><i class="fas fa-edit"></i><small>manage</small></a>-->
+                      <a href='{{channel.manage_href}}'><small>manage</small></a>
+                    <td>
+
+                  </tr>
+
+            {%endfor%}
+          </table>
+          {%else%}
+            <p class='none_found'><em>You have not created any rooms</em></p>
+          {%endif%}
+
+        </div>
+        <div class='spacer' style='height:30px;'></div>
+        <button class='create_room_button' data-toggle="modal" data-target="#createRoom"><i class="fas fa-plus"></i> Create channel</button>
+      </div>
+      <div class='create_channel_anchor'>
+      <div class="modal" id="createRoom" tabindex="-1" role="dialog" aria-labelledby="createRoomLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style='border-bottom:none;'>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <span style='font-size:25px;'><strong>#</strong> <input type='text' id='room_name' placeholder="Channel name"></span>
+        <div class='channel_name_error'></div>
+      </div>
+      <div class="modal-footer" style='border-top:none;'>
+        <button class='create_room_panel'>Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </div>
+  </div>
+  {%else%}
+    <div class='user_owner_profile'>
+      <div class='owner_top_bar' style="background-image:url(/static/{{user.cover_avatar}});background-size:cover;"></div>
+      <div class='container'>
+        <div class='row'>
+          <div class='col'>
+            <div class='container'>
+              <div class='row'>
+                <div class='col-lg-2' style='text-align:center;'>
+                  {%if user.avatar_by_url%}
+                    <div class='owner_user_avatar' style="background-image:url('{{user.avatar}}');background-size:cover;"></div>
+                  {%else%}
+                    <div class='owner_user_avatar' style="background-image:url(/static/{{user.avatar}});background-size:cover;"></div>
+                  {%endif%}
+                  <div class='spacer' style='height:20px;'></div>
+                  <button class='invite_user'>Invite {{user.username}}</button>
+                </div>
+                <div class='col'>
+                  <div class='spacer' style='height:20px;'></div>
+                  <p class='username' style='margin-left:100px;'>@{{user.username}}</p>
+                  <div class='spacer' style='height:20px;'></div>
+                  <div class='mail_stuff' style='margin-left:100px;'>
+                    <i class="fas fa-envelope" style='font-size:1.5em;'></i> <a href='mailto:{{current.email}}'><span class='username' style='font-size:18px'><u>{{user.email}}</u></span></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='spacer' style='height:140px;'></div>
+      <div class='container'>
+        <div class='row'>
+          {%for l in user.social%}
+            <div class='col my_social_links'>
+              <a href='{{l.link}}' style='color:white;text-decoration:none;'><i class="{{l.icon}}" style='font-size:2em;margin-top:20px;'></i></a>
+            </div>
+          {%endfor%}
+        </div>
+      </div>
+    </div>
+  {%endif%}
+
+  </body>
+  <script>
+  $(document).ready(function(){
+      $('.delete_account').click(function(){
+        $('.options').html('<p style="font-size:12px;color:red">Are you sure? <a href = "/delete_account" style="color:red"><u>Delete</u></a></p>')
+
+      });
+      var counter = 0;
+      $('.social_links').on('click', '.social', function(){
+        var current_id = this.id;
+        var converter = {'1': 'Youtube', '2': 'Google+', '3': 'Linkedin', '4': 'Facebook', '5': 'Personal Site', '6': 'Github', '7':'Twitter'};
+        var new_html = `
+        <div class='special_spacer' style='height:5px;'></div>
+        <input type='text' id='link${current_id}' class='link_input_box' placeholder='${converter[this.id]}'>
+        `
+        $('.input_boxes_place').append(new_html);
+        if(counter == 0){
+          var the_new_html = `
+            <div class='second_spacer' style='height:5px;'></div>
+            <div class='button_house'>
+              <button class="access_button" id='submit_new_links'>Add links</button>
+            </div>
+          `
+          $('.social_links').append(the_new_html)
+          counter += 1;
+        }
+      });
+      $('.social_links').on('click', '#submit_new_links', function(){
+
+        var listing = {};
+        for (var i = 1; i< 8; i++){
+          listing[i] = $('#link'+i.toString()).val();
+        }
+        $.ajax({
+          url: "/update_profile_link",
+          type: "get",
+          data: {links: listing},
+          success: function(response) {
+            $('.input_boxes_place').html('<p><small>Profile updated</small></p>');
+            $('.button_house').html('');
+          },
+          error: function(xhr) {
+            //Do Something to handle error
+          }
+        });
+      });
+      $(".create_channel_anchor").on('click', 'button', function(){
+          var channel_name = $('#room_name').val();
+          if (channel_name == ''){
+            $('.channel_name_error').html('<p class="error_class">Channel name cannot be left blank</p>');
+            $('#room_name').css('border-color', 'red');
+          }
+          else{
+            $.ajax({
+              url: "/create_channel",
+              type: "get",
+              data: {name: channel_name},
+              success: function(response) {
+                if (response.status === "False"){
+                  $('.channel_name_error').html('<p class="error_class">You have already created channel "'+channel_name+'"</p>');
+                  $('#room_name').css('border-color', 'red');
+                }
+                else{
+                  window.location.replace('/channel/'+response.channel_id.toString());
+                }
+
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+              }
+            });
+          }
+      });
+      $('.create_channel_anchor').on('focus', '#room_name', function(){
+        $('#room_name').css('border-color', '#1F59CD');
+        $('.channel_name_error').html('');
+      });
+  });
+  </script>
+</html>

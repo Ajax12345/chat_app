@@ -1,0 +1,217 @@
+
+
+<html>
+  <header>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  </header>
+  <style>
+    .access{
+      border:solid;
+      border-width:1px;
+      border-radius: 10px;
+      border-color:#D6D6D6;
+      width:300px;
+      padding-right:20px;
+      padding-left:20px;
+      padding-bottom: 10px;
+      text-align: center;
+      box-shadow: 3px 3px #EBEAEA;
+
+    }
+    .terms_text{
+      font-size:13.6;
+    }
+    .create_account{
+
+    }
+    input{
+      border:0;
+      padding-top:9px;
+      width:250px;
+      padding-bottom:9px;
+      border-bottom:solid;
+      border-bottom-width:2px;
+      border-bottom-color:#1F59CD;
+
+    }
+    input:focus{
+      outline: none;
+    }
+    .create_account{
+      color:#6075ED;
+      font-size:20px;
+    }
+    .small_text{
+      font-size: 13.3px;
+    }
+    .access_button{
+      background-color: #1554D3;
+      border:none;
+      padding-left: 10px;
+      padding-right: 10px;
+      padding-top:5px;
+      padding-bottom:5px;
+      width:200px;
+      height:37px;
+      border-radius: 30px;
+      color:white;
+    }
+    .access_button:hover{
+      background-color:#647CFF;
+    }
+    p{
+      color:#FF143B;
+      font-size:13.4;
+    }
+    .back_button{
+      border:none;
+    }
+  </style>
+  <body>
+    <!--TODO: remove focus outline on input boxes-->
+    <!--TODO: Create input boxes with only baseline-->
+      <div class='access'>
+        <div class='spacer' style='height:20px;'></div>
+        <input type='text' id='username' placeholder="Email">
+        <div class='spacer' style='height:20px;'></div>
+        <input type='password' id='password' placeholder="Password">
+        <div class='login_error_message'></div>
+        <div class='spacer' style='height:20px;'></div>
+        <button id='login' class='access_button'>Login</button>
+        <div class='spacer' style='height:30px'>
+        </div>
+        <div class='footer'>
+          <span class='small_text'>New? <button type="button" id='create' class="btn btn-link"><span class = 'small_text'>Create account</span></button></span>
+        </div>
+      </div>
+  </body>
+  <script>
+    $(document).ready(function(){
+      $('.access').on('click', 'button', function(){
+        $(".login_error_message").html('');
+        if (this.id == 'create'){
+          var content = `
+            <p class='create_account'>Signup</div>
+            <div class='spacer' style='height:10px;'></div>
+            <input type = 'text' id='newusername' placeholder='Username' required>
+            <div class='spacer' style='height:20px;'></div>
+            <input type = 'email' id='newemail' placeholder='Email' required>
+            <div class='new_name_issue'></div>
+            <div class='spacer' style='height:20px;'></div>
+            <input type = 'password' id='newpassword' placeholder='Password' required>
+            <div class='new_password_issue'></div>
+            <div class='spacer' style='height:20px;'></div>
+            <input type = 'password' id='confirmnewpassword' placeholder='Confirm password' required>
+            <div class='new_password_confirm_issue'></div>
+            <div class='spacer' style='height:20px;'></div>
+            <button id='create_new_account' class='access_button'>Start chatting</button>
+            <div class='new_pacer' style='height:20px;'></div>
+            <span class='terms_text'><input type="checkbox" class="form-check-input" id="agree"> By creating an account you agree to Sup's <a href='/terms_and_conditions'><u>terms and conditions</u></a></span>
+            <div class='terms_and_conditions'></div>
+            <div class='spacer' style='height:20px;'></div>
+            <span><i class="fas fa-arrow-left"></i><button id='cancel' class='back_button'>back</button></span>
+          `
+          $('.access').html(content);
+        }
+        else if (this.id == 'login'){
+          var username = $('#username').val();
+          var password = $('#password').val();
+          if (username === '' || password === ''){
+            $('input').css('border-color', '#FF143B');
+            $(".login_error_message").html('<p>username or password cannot be empty</p>');
+          }
+          else{
+            $.ajax({
+              url: "/login",
+              type: "get",
+              data: {email: username, password:password},
+              success: function(response) {
+                if(response.succeeded == "True"){
+                  window.location.replace('/dashboard');
+                }
+                else{
+                  $('.'+response.target_class).html('<p>'+response.message+'</p>');
+                }
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+              }
+            });
+          }
+        }
+        else if (this.id == 'create_new_account'){
+          var username = $("#newusername").val();
+          var email = $("#newemail").val();
+          var password = $("#newpassword").val();
+          var password_confirm = $("#confirmnewpassword").val();
+          var agreeded = $('#agree').is(':checked');
+          if (username === '' || email === ''){
+            $('input').css('border-color', '#FF143B');
+            $('.new_name_issue').html('<p>Username and email cannot be left blank</p>');
+          }
+          else if (password === ''){
+            $('input').css('border-color', '#FF143B');
+            $('.new_password_issue').html('<p>Password cannot be left empty</p>');
+          }
+          else if (password_confirm === ''){
+            $('input').css('border-color', '#FF143B');
+            $('.new_password_confirm_issue').html('<p>Please confirm your password</p>')
+          }
+          else if (password != password_confirm){
+            $('input').css('border-color', '#FF143B');
+            $('.new_password_confirm_issue').html('<p>Passwords do not match</p>');
+          }
+          else if (!agreeded){
+            $('.terms_and_conditions').html('<p> You must agree to the terms and conditions')
+          }
+          else{
+            $.ajax({
+              url: "/create-account",
+              type: "get",
+              data: {username: username, email:email, password:password},
+              success: function(response) {
+                if(response.succeeded == "True"){
+                  window.location.replace('/dashboard');
+                }
+                else{
+                  $('.new_name_issue').html('');
+                  $('.new_password_issue').html('');
+                  $('.new_password_confirm_issue').html('');
+                  $('.'+response.target_class).html('<p>'+response.message+'</p>');
+                }
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+              }
+            });
+          }
+
+        }
+        else{
+          var final_content = `
+          <div class='spacer' style='height:20px;'></div>
+          <input type='text' id='username' placeholder="Email">
+          <div class='spacer' style='height:20px;'></div>
+          <input type='password' id='password' placeholder="Password">
+          <div class='login_error_message'></div>
+          <div class='spacer' style='height:20px;'></div>
+          <button id='login' class='access_button'>Login</button>
+          <div class='spacer' style='height:30px'>
+          </div>
+          <div class='spacer' style='height:30px'>
+          <div class='footer'>
+            <span class='small_text'>New? <button type="button" id='create' class="btn btn-link"><span class = 'small_text'>Create account</span></button></span>
+          </div>
+          `
+          $('.access').html(final_content);
+        }
+
+      });
+      
+    });
+  </script>
+</html>

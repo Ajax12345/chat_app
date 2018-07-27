@@ -1,0 +1,150 @@
+<html>
+<style>
+* {
+    box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.outer-pannel{
+  width:23%;
+  height:100%;
+  max-height:100%;
+  background-color: white;
+}
+.transcripts{
+  width:40%;
+  height:100%;
+}
+.boxes{
+  width:37%;
+  height:100%;
+}
+.room_channel_name{
+  margin-left: 40px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size:26px;
+}
+.user_pannel{
+  margin:0 auto;
+  width:65%;
+  text-align: center;
+  border-radius: 6px;
+  border:solid;
+  border-width:1px;
+  border-color:#E5E4E4;
+  -webkit-box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
+-moz-box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
+box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
+
+}
+.remove_user_pannel{
+  border:none;
+
+}
+.pannel_text{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:14px;
+}
+
+</style>
+  <header>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Sunflower:300" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+    <script defer="" src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+  </header>
+  <body>
+    <div class="row">
+  <div class="column outer-pannel">
+    <p class='room_channel_name'><strong>#TestChannel</strong></p>
+    <div class='spacer' style='height:15px;'></div>
+    <div class='notifications'></div>
+    <table style='margin:0 auto;'>
+        {%for user_row in avatars%}
+        <tr>
+          {%for avatar in user_row%}
+            <td>
+
+
+              {%if avatar.shade%}
+              <div id='user_pic{{avatar.id}}true' style="background-image:url('{{avatar.url}}');width:50px;height:50px;background-size:cover;border-radius:50%;">
+                <div class='shade_avatar{{avatar.id}}' style='background-color: #E5E4E4;width:50px;height:50px;opacity:0.9;border-radius:50%'>
+                </div>
+              </div>
+              {%else%}
+              <div id='user_pic{{avatar.id}}false' style="background-image:url('{{avatar.url}}');width:50px;height:50px;background-size:cover;border-radius:50%;">
+                <div class='shade_avatar{{avatar.id}}' style='background-color: #E5E4E4;width:50px;height:50px;opacity:0.0;border-radius:50%'>
+                </div>
+              </div>
+              {%endif%}
+
+          </td>
+          {%endfor%}
+        </tr>
+        {%endfor%}
+    </table>
+    <div class='user_information'></div>
+  </div>
+  <div class="column transcripts" style="background-color:#bbb;">
+
+  </div>
+  <div class="column boxes" style="background-color:#ccc;">
+    <h2>Column 3</h2>
+    <p>Some text..</p>
+  </div>
+</div>
+  </body>
+  <script>
+  $(document).ready(function(){
+    var hovered_elements = [];
+
+    $("div[id^='user_pic']").hover(
+      function(){
+        var current_id = this.id.match('\\d+');
+        if($('.shade_avatar'+current_id).css('opacity') == '0.9'){
+          $('.shade_avatar'+current_id).css('opacity', '0.0');
+        }
+
+    },
+    function(){
+      var flag = this.id.match('true|false');
+      var current_id = this.id.match('\\d+');
+      if(flag == 'true'){
+        $('.shade_avatar'+current_id).css('opacity', '0.9');
+
+      }
+    });
+    $('.outer-pannel').on('click', "div[id^='user_pic']", function(){
+        var pannel = `
+          <div class='spacer' style='height:20px;'></div>
+          <div class='user_pannel'>
+            <p class='pannel_text'><strong style='margin-left:20px;font-size:20px;'>Ajax1234</strong> <button class='remove_user_pannel' style='float:right;'><i class="fas fa-times"></i></button></p>
+            <p class='pannel_text'><u style='font-size:12px;'>Standard User</u></p>
+            <p class='pannel_text'>View <strong>@Ajax1234's</strong> <a href='/user/1'>profile</a></p>
+            <p class='pannel_text'><small>Last seen 10 minutes ago</small></p>
+            <p class='pannel_text'><a href='/'><small>private message <strong>Ajax1234</strong></small></a>
+          </div>
+        `;
+        $('.user_information').html(pannel);
+    });
+    $('.outer-pannel').on('click', '.remove_user_pannel', function(){
+      $('.user_information').html('');
+    });
+  });
+  </script>
+</html>
