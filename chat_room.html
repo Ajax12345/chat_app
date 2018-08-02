@@ -3,14 +3,12 @@
 * {
     box-sizing: border-box;
 }
-
 /* Create three equal columns that floats next to each other */
 .column {
     float: left;
     width: 33.33%;
     padding: 10px;
 }
-
 /* Clear floats after the columns */
 .row:after {
     content: "";
@@ -47,11 +45,9 @@
   border-width:1px;
   border-color:#E5E4E4;
   background-color: white;
-
 }
 .remove_user_pannel{
   border:none;
-
 }
 .pannel_text{
   font-family: 'Fira Sans', sans-serif;
@@ -79,8 +75,6 @@
   text-align: center;
   background-color: #5ADD33;
   position: absolute;
-
-
 }
 .user_entrance_text{
   font-family: 'Fira Sans', sans-serif;
@@ -92,7 +86,6 @@
 .top_messages{
   width:80%;
   margin:0 auto;
-
 }
 .top_content{
   font-family: 'Fira Sans', sans-serif;
@@ -139,8 +132,6 @@
   font-family: 'Fira Sans', sans-serif;
 }
 .menu{
-
-
 }
 .pill{
   width:auto;
@@ -158,10 +149,12 @@
   width:41%;
   margin-left:-10px;
   bottom:0;
-  height:100px;
+  height:130px;
+  background-color: #999999;
 }
 .palette_wrapper{
   position: absolute;
+  z-index: 1;
   bottom:100;
   height:20px;
 }
@@ -177,14 +170,14 @@
   padding-right: 12px;
   padding-top: 9px;
   padding-bottom: 9px;
+  margin-top:30px;
   font-family: 'Fira Sans', sans-serif;
 }
 .main_input_box:focus{
-
     outline: none;
-
 }
 .fonts_and_styles{
+  margin-top:20px;
   background-color: rgba(255,255,255,0);
   border:none;
 }
@@ -203,7 +196,7 @@
   padding-top: 4px;
   padding-bottom: 4px;
   padding-right: 8px;
-  margin-top:-10px;
+  margin-top:0px;
 }
 .tagging_title{
   font-size:18px;
@@ -217,14 +210,12 @@
 }
 .post_tag{
   font-family: 'Fira Sans', sans-serif;
-
   color:white;
   padding-top:5px;
   padding-bottom:5px;
   padding-left:20px;
   padding-right:20px;
   border-radius: 30px;
-
 }
 .post_tag:hover{
   padding-top:4px;
@@ -258,9 +249,7 @@
 .no_tag_listings{
   font-size:15px;
   font-family: 'Fira Sans', sans-serif;
-
 }
-
 </style>
   <header>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Sunflower:300" rel="stylesheet">
@@ -467,7 +456,6 @@
   <script>
   $(document).ready(function(){
     var hovered_elements = [];
-
     $("div[id^='user_pic']").hover(
       function(){
         var current_id = this.id.match('\\d+');
@@ -481,19 +469,16 @@
           $('#user_pic'+the_id+flag).css('border-width', '1px')
           $('#user_pic'+the_id+flag).css('border-color', '#4788F9');
         }
-
     },
     function(){
       var flag = this.id.match('true|false');
       var current_id = this.id.match('\\d+');
       if(flag == 'true'){
         $('.shade_avatar'+current_id).css('opacity', '0.9');
-
       }
       else{
         var the_id = current_id;
         $('#user_pic'+the_id+flag).css('border', 'none')
-
       }
     });
     $('.outer-pannel').on('click', "div[id^='user_pic']", function(){
@@ -507,17 +492,12 @@
             <p class='pannel_text'><a href='/'><small>private message <strong>Ajax1234</strong></small></a>
           </div>
         `;
-
-
         $('#user'+the_id+'synopis').html(pannel);
     });
     $('.outer-pannel').on('click', ".remove_user_pannel", function(){
       var the_id = this.id.match('\\d+');
-
       $('#user'+the_id+'synopis').html('');
-
       //"div[id^='removesynopis']"
-
     });
     var counter = 1;
     $('.outer-pannel').on('click', '.load_user', function(){
@@ -528,10 +508,8 @@
         </div>
         <div class='spacer userspacer${counter}' style='height:100px;'></div>
       `;
-
       $('.notifications').append(pannel);
       $(".my_new_user"+counter.toString()).animate({left: '220px'});
-
       counter += 1;
     });
     $('.outer-pannel').on('click', '.dismiss_notification', function(){
@@ -549,7 +527,6 @@
         var new_val = 1+parseInt(current_value);
         $('.counter'+the_id).html('<strong>'+new_val.toString()+'</strong>');
       }
-
     });
     var flag = false
     $('.outer-pannel').on('click', '.room_settings', function(){
@@ -618,14 +595,11 @@
         $('#tag_place'+tag_counter.toString()).html(new_html);
         $('#new_final_tag'+the_id).css('background-color', $(this).css('background-color'));
         $('#tag'+the_id).remove();
-
         if ($('.tag_listing').text().match('^\\s+$')){
           $('.tag_listing').html('<p class="no_tag_listings"><i>No tags available</i></p>');
         }
         tag_counter += 1;
       }
-
-
     });
     $('.transcripts').on('click', '.final_tag', function(){
       var the_id = this.id.match('\\d+');
@@ -645,6 +619,5 @@
       $('#tag'+the_id).css('background-color',current_background)
     });
   });
-
   </script>
 </html>
