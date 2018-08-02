@@ -22,6 +22,7 @@
   height:100%;
   max-height:100%;
   background-color: white;
+  overflow: scroll;
 }
 .transcripts{
   width:40%;
@@ -37,16 +38,15 @@
   font-size:26px;
 }
 .user_pannel{
-  margin:0 auto;
-  width:65%;
+  width:14%;
+  z-index: 1;
+  position: absolute;
   text-align: center;
   border-radius: 6px;
   border:solid;
   border-width:1px;
   border-color:#E5E4E4;
-  -webkit-box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
--moz-box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
-box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
+  background-color: white;
 
 }
 .remove_user_pannel{
@@ -56,6 +56,175 @@ box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
 .pannel_text{
   font-family: 'Fira Sans', sans-serif;
   font-size:14px;
+}
+.dismiss_notification{
+  border:none;
+  background-color: #5ADD33;
+  border-top-right-radius: 4px;
+}
+.full_users{
+  margin-left:30px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.user_entrance{
+  width:240px;
+  margin:0 auto;
+  margin-left:-200px;
+  color:white;
+  font-family: 'Fira Sans', sans-serif;
+  font-size:15px;
+  border-radius:4px;
+  border-width: 1px;
+  border-color:#32991C;
+  text-align: center;
+  background-color: #5ADD33;
+  position: absolute;
+
+
+}
+.user_entrance_text{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:18px;
+}
+.star_top_post_stuff{
+  border:none;
+}
+.top_messages{
+  width:80%;
+  margin:0 auto;
+
+}
+.top_content{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:16px;
+}
+.post_info_text{
+  font-family: 'Fira Sans', sans-serif;
+  margin-left:10px;
+  font-size:11px;
+  color:#BBBBBB;
+}
+.user_footer{
+  height:50px;
+  width:22.75%;
+  position: absolute;
+  bottom:0;
+  background-color:blue;
+}
+.room_settings{
+  border:none;
+  background-color: blue;
+  width:16px;
+  height:16px;
+}
+.current_user_info{
+  font-size:19px;
+  color:white;
+  font-family: 'Fira Sans', sans-serif;
+}
+.user_menu{
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  margin-left:20px;
+  width:60%;
+  bottom:100px;
+  border:solid;
+  border-width:1px;
+  border-color:#CCCCCC;
+  border-radius: 3px;
+  background-color: white;
+}
+.menu_item{
+  font-family: 'Fira Sans', sans-serif;
+}
+.menu{
+
+
+}
+.pill{
+  width:auto;
+  height:10px;
+  padding-right:8px;
+  padding-left:8px;
+  padding-top:2px;
+  padding-bottom:2px;
+  border-radius: 60px;
+  background-color: blue;
+  color:white;
+}
+.input_region{
+  position: absolute;
+  width:41%;
+  margin-left:-10px;
+  bottom:0;
+  height:100px;
+}
+.palette_wrapper{
+  position: absolute;
+  bottom:100;
+  height:20px;
+}
+.main_input_box{
+  margin:0 auto;
+  width:400px;
+  height:50px;
+  border-radius: 40px;
+  border:solid;
+  border-color:blue;
+  border-width:1px;
+  padding-left: 12px;
+  padding-right: 12px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.main_input_box:focus{
+
+    outline: none;
+
+}
+.fonts_and_styles{
+  background-color: rgba(255,255,255,0);
+  border:none;
+}
+.tag_input{
+  background-color: rgba(255,255,255,0);
+  border:none;
+}
+.color_palette_slider{
+  width:390px;
+}
+.post_message{
+  border-radius: 50px;
+  background-color: blue;
+  padding-left: 8px;
+  width:50px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 8px;
+  margin-top:-10px;
+}
+.tagging_title{
+  font-size:18px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.tag_descriptions{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:14px;
+  color:#CCCCCC;
+  float:left;
+}
+.post_tag{
+  font-family: 'Fira Sans', sans-serif;
+
+  color:white;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius: 30px;
+
 }
 
 </style>
@@ -84,13 +253,19 @@ box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
               {%if avatar.shade%}
               <div id='user_pic{{avatar.id}}true' style="background-image:url('{{avatar.url}}');width:50px;height:50px;background-size:cover;border-radius:50%;">
                 <div class='shade_avatar{{avatar.id}}' style='background-color: #E5E4E4;width:50px;height:50px;opacity:0.9;border-radius:50%'>
+
                 </div>
+
               </div>
+              <div id='user{{avatar.id}}synopis' class='user_profile_information'></div>
               {%else%}
               <div id='user_pic{{avatar.id}}false' style="background-image:url('{{avatar.url}}');width:50px;height:50px;background-size:cover;border-radius:50%;">
                 <div class='shade_avatar{{avatar.id}}' style='background-color: #E5E4E4;width:50px;height:50px;opacity:0.0;border-radius:50%'>
+
                 </div>
+
               </div>
+                <div id='user{{avatar.id}}synopis' class='user_profile_information'></div>
               {%endif%}
 
           </td>
@@ -98,10 +273,148 @@ box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
         </tr>
         {%endfor%}
     </table>
+    <button type="button" class="btn btn-link full_users" data-toggle="modal" data-target="#roomFullUserListing">See all (10 users)</button>
     <div class='user_information'></div>
-  </div>
-  <div class="column transcripts" style="background-color:#bbb;">
+    <div class='spacer' style='height:20px;'></div>
+    <!--<button class='load_user'>Load</button>-->
 
+<!-- Modal -->
+<div class="modal" id="roomFullUserListing" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Users for #TestChannel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+  <div class='top_messages'>
+    <p class='top_content'><strong style='font-size:17px;'>Pinned Messages</strong>  <span class='pill'>30</span></p>
+
+    {%for post in top_posts%}
+      <!--<span class='top_content'><button id='star_top_post{{post.id}}' class='star_top_post_stuff'><i class="far fa-star"></i></button> <p class='counter{{post.id}}'></p> {{post.content}}</span>-->
+      <span class='top_content'><button id='star_top_post{{post.id}}' class='star_top_post_stuff'><i class="fas fa-map-pin" id='pin{{post.id}}'></i></button> {{post.content}}</span>
+      <div class='top_post_info' id='info_post{{post.id}}'>
+        <p id='post_info_data{{post.id}}' class='post_info_text'>Pinned by Ajax1234, Jpetullo, and <a href = '' style='font-family: "Fira Sans", sans-serif;font-size:11px; color:#BBBBBB;'><u>18 others</u></a></p></span>
+      </div>
+      <div class='spacer'></div>
+    {%endfor%}
+
+
+  </div>
+  <div class='menu'></div>
+  <div class='user_footer'>
+    <div class='spacer' style='height:10px;'></div>
+    <div class='container'>
+        <div class='row'>
+          <div class='col'>
+            <button class='room_settings'><i class="fas fa-cog" style='color:white;font-size:1.6em;'></i></button>
+          </div>
+          <div class='col'>
+
+          </div>
+          <div class='col'>
+            <p class='current_user_info'>@{{current.username}}</p>
+          </div>
+          <div class='col'>
+            {%if current.avatar_by_url%}
+              <div class='current_user_avatar' style="background-image:url('{{current.avatar}}');width:36px;height:36px;background-size:cover;border-radius:3px;"></div>
+            {%else%}
+              <div class='current_user_avatar' style="background-image:url(/static/{{current.avatar}});width:36px;height:36px;background-size:cover;border-radius:3px;"></div>
+            {%endif%}
+          </div>
+        </div>
+    </div>
+  </div>
+  </div>
+  <div class="column transcripts" style="background-color:#E4E6E6;">
+    <!--IDEA: have owners define valid tags to add to transcript-->
+    <div class='palette_wrapper'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col'></div>
+          <div class='col'>
+            <div class='valid_tags'></div>
+            <div class='palette' style='margin-left:24px;'></div>
+          </div>
+          <div class='col'></div>
+        </div>
+      </div>
+    </div>
+    <div class='input_region'>
+      <div class='container'>
+
+        <div class='row'>
+          <div class='col'>
+            <div class='spacer' style='height:8px;'></div>
+            <button class='fonts_and_styles'><i class="fas fa-pencil-alt" id='color_marker' style='font-size:1.3em;color:black;'></i></button>
+            <div class='spacer' style='height:15px;'></div>
+            <!--<button class='tag_input' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tag" style='font-size:1.3em'></i></button>-->
+            <div class="btn-group dropup">
+              <button type="button" class="dropdown tag_input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-tag" style='font-size:1.3em'></i>
+              </button>
+              <div class="dropdown-menu">
+                <!-- Dropdown menu links -->
+              </div>
+            </div>
+
+          </div>
+
+          <div class='col'>
+            <input type = 'text' class="main_input_box" placeholder="Say something...">
+          </div>
+          <div class='col'>
+
+          </div>
+        </div>
+        <div class='row'>
+          <div class='col'></div>
+          <div class='col'></div>
+          <div class='col'></div>
+          <div class='col'>
+            <button class='post_message'><i class="far fa-paper-plane" style='color:white;font-size:1.5em;'></i></button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    <!--Tag popup--->
+    <div class="modal" id="validTags" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style='border-bottom:none;'>
+        <h5 class="modal-title" id="exampleModalLabel"><p class='tagging_title'><strong>Message Tagging Options</strong></p></h5>
+
+      </div>
+      <div class="modal-body">
+
+        <div class='container'>
+          <div class='row'>
+            <div class='col'><span class='post_tag' id='tag1' style='background-color:red'>New event</span></div>
+            <div class='col'><span class='post_tag' id ='tag2' style='background-color:#F1921E'>Announcment</span></div>
+            <div class='col'><span class='post_tag' id = 'tag3' style='background-color:purple'>Product release</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class='modal-footer' style='border-top:none;'>
+        <!--<p class='tag_descriptions'>Tags are created by the room owners to help distinguish chat messages</p>-->
+      </div>
+    </div>
+  </div>
+</div>
+    <!---->
   </div>
   <div class="column boxes" style="background-color:#ccc;">
     <h2>Column 3</h2>
@@ -119,6 +432,13 @@ box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
         if($('.shade_avatar'+current_id).css('opacity') == '0.9'){
           $('.shade_avatar'+current_id).css('opacity', '0.0');
         }
+        else{
+          var the_id = this.id.match('\\d+');
+          var flag = this.id.match('true|false');
+          $('#user_pic'+the_id+flag).css('border', 'solid')
+          $('#user_pic'+the_id+flag).css('border-width', '1px')
+          $('#user_pic'+the_id+flag).css('border-color', '#4788F9');
+        }
 
     },
     function(){
@@ -128,23 +448,125 @@ box-shadow: 1px 0px 8px -1px rgba(0,0,0,0.75);
         $('.shade_avatar'+current_id).css('opacity', '0.9');
 
       }
+      else{
+        var the_id = current_id;
+        $('#user_pic'+the_id+flag).css('border', 'none')
+
+      }
     });
     $('.outer-pannel').on('click', "div[id^='user_pic']", function(){
+        var the_id = this.id.match('\\d+');
         var pannel = `
-          <div class='spacer' style='height:20px;'></div>
           <div class='user_pannel'>
-            <p class='pannel_text'><strong style='margin-left:20px;font-size:20px;'>Ajax1234</strong> <button class='remove_user_pannel' style='float:right;'><i class="fas fa-times"></i></button></p>
+            <p class='pannel_text'><strong style='margin-left:20px;font-size:20px;'>Ajax1234</strong> <button class='remove_user_pannel' id='removesynopis${the_id}' style='float:right;'><i class="fas fa-times"></i></button></p>
             <p class='pannel_text'><u style='font-size:12px;'>Standard User</u></p>
             <p class='pannel_text'>View <strong>@Ajax1234's</strong> <a href='/user/1'>profile</a></p>
             <p class='pannel_text'><small>Last seen 10 minutes ago</small></p>
             <p class='pannel_text'><a href='/'><small>private message <strong>Ajax1234</strong></small></a>
           </div>
         `;
-        $('.user_information').html(pannel);
+
+
+        $('#user'+the_id+'synopis').html(pannel);
     });
-    $('.outer-pannel').on('click', '.remove_user_pannel', function(){
-      $('.user_information').html('');
+    $('.outer-pannel').on('click', ".remove_user_pannel", function(){
+      var the_id = this.id.match('\\d+');
+
+      $('#user'+the_id+'synopis').html('');
+
+      //"div[id^='removesynopis']"
+
     });
+    var counter = 1;
+    $('.outer-pannel').on('click', '.load_user', function(){
+      var pannel = `
+        <div class='user_entrance my_new_user${counter}'>
+          <button class='dismiss_notification' id='dismissuser${counter}' style='float:right;'><i class="fas fa-times"></i></button>
+          <p class='user_entrance_text'>@Ajax1234 has entered the room</p>
+        </div>
+        <div class='spacer userspacer${counter}' style='height:100px;'></div>
+      `;
+
+      $('.notifications').append(pannel);
+      $(".my_new_user"+counter.toString()).animate({left: '220px'});
+
+      counter += 1;
+    });
+    $('.outer-pannel').on('click', '.dismiss_notification', function(){
+      var the_id = this.id.match('\\d+');
+      $('.my_new_user'+the_id).remove();
+      $('.userspacer'+the_id).remove();
+    });
+    $('.outer-pannel').on('click', '.star_top_post_stuff', function(){
+      var the_id = this.id.match('\\d+');
+      var current_value = $('.counter'+the_id).text();
+      if (current_value == ''){
+        $('.counter'+the_id).html('<strong>1</strong>');
+      }
+      else{
+        var new_val = 1+parseInt(current_value);
+        $('.counter'+the_id).html('<strong>'+new_val.toString()+'</strong>');
+      }
+
+    });
+    var flag = false
+    $('.outer-pannel').on('click', '.room_settings', function(){
+      var pannel_html = `
+        <div class='user_menu'>
+          <p class='menu_item'>Toggle dark theme</p>
+          <div class='spacer'></div>
+          <p class='menu_item'>Channel Description</p>
+          <div class='spacer'></div>
+          <p class='menu_item'>Channel Rules</p>
+          <div class='spacer'></div>
+          <p class='menu_item'>Export to CSV</p>
+          <div class='spacer'></div>
+        </div>
+      `;
+      if (!flag){
+        $('.menu').html(pannel_html);
+        flag = true;
+      }
+      else{
+        $('.menu').html('');
+        flag = false
+      }
+    });
+    var palette_loaded = false;
+    $('.transcripts').on('click', '.fonts_and_styles', function(){
+      if (palette_loaded){
+        $('.palette').html('');
+        palette_loaded = false;
+      }
+      else{
+        var color_palette = `
+          <div class='color_options'>
+            <input type="range" min="0" max="755" value="367" class='color_palette_slider'>
+            <div class='color_range_info' style='height:10px;'></div>
+          </div>
+        `;
+        palette_loaded = true;
+        $('.palette').html(color_palette);
+      }
+    });
+    $('.transcripts').on("input change", '.color_palette_slider', function(){
+      var the_val = $(this).val();
+        $.ajax({
+        url: "/get_color",
+        type: "get",
+        data: {index: the_val},
+        success: function(response) {
+          $('#color_marker').css('color', response.result);
+          $('.main_input_box').css('color', response.result);
+        },
+        error: function(xhr) {
+        //Do Something to handle error
+        }
+      });
+    });
+
   });
+
   </script>
 </html>
+
