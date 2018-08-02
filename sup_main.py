@@ -141,8 +141,14 @@ def channel_development():
     counter = iter(range(16))
     amount = iter(range(16))
     _t = [[avatar(b, next(counter) > 12, next(amount)) for b in i] for i in final_avatars]
-    print(_t)
-    return flask.render_template('chat_room.html', avatars = _t)
+    top_post = collections.namedtuple('top_post', ['content', 'id'])
+    return flask.render_template('chat_room.html', avatars = _t, top_posts = [top_post(a, i) for i, a in enumerate(['Check this out!', 'First message', 'Upgrading soon'], 1)], current = sup_user.User.find_user(flask.session['user_id']).obj)
+
+@app.route('/get_color')
+def get_color():
+    _index = flask.request.args.get('index')
+    return flask.jsonify({"result":sup_user.Colors.colors_2[int(_index)]})
+
 
 @app.errorhandler(404)
 def page_not_found(e):
