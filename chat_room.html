@@ -226,6 +226,40 @@
   border-radius: 30px;
 
 }
+.post_tag:hover{
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-left:18px;
+  padding-right:18px;
+}
+.final_tag{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:12px;
+  color:white;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 30px;
+}
+.final_tag:hover{
+  padding-top: 1px;
+  padding-bottom:1px;
+  padding-right:8px;
+  padding-left:8px;
+}
+.tag_listing{
+  max-width:800px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  padding-bottom: 6px;
+}
+.no_tag_listings{
+  font-size:15px;
+  font-family: 'Fira Sans', sans-serif;
+
+}
 
 </style>
   <header>
@@ -363,8 +397,15 @@
               <button type="button" class="dropdown tag_input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-tag" style='font-size:1.3em'></i>
               </button>
-              <div class="dropdown-menu">
-                <!-- Dropdown menu links -->
+              <div class="dropdown-menu tag_listing" style='text-align:center'>
+                <div class='spacer' style='height:10px;'></div>
+                <span class='post_tag' id='tag1' style='background-color:red'>New event</span>
+                <div class='spacer' style='height:20px;'></div>
+                <span class='post_tag' id ='tag2' style='background-color:#F1921E'>Announcment</span>
+                <div class='spacer' style='height:20px;'></div>
+                <span class='post_tag' id = 'tag3' style='background-color:purple'>Product release</span>
+                <div class='spacer' style='height:20px;'></div>
+
               </div>
             </div>
 
@@ -378,9 +419,10 @@
           </div>
         </div>
         <div class='row'>
-          <div class='col'></div>
-          <div class='col'></div>
-          <div class='col'></div>
+          <div class='col-1'></div>
+          <div class='col' id='tag_place1'></div>
+          <div class='col' id='tag_place2'></div>
+          <div class='col' id='tag_place3'></div>
           <div class='col'>
             <button class='post_message'><i class="far fa-paper-plane" style='color:white;font-size:1.5em;'></i></button>
           </div>
@@ -541,7 +583,7 @@
       else{
         var color_palette = `
           <div class='color_options'>
-            <input type="range" min="0" max="755" value="367" class='color_palette_slider'>
+            <input type="range" min="0" max="754" value="367" class='color_palette_slider'>
             <div class='color_range_info' style='height:10px;'></div>
           </div>
         `;
@@ -564,9 +606,45 @@
         }
       });
     });
+    var tag_counter = 1;
+    $('.transcripts').on('click', '.post_tag', function(){
+      if (tag_counter < 4){
+        var the_id = this.id.match('\\d+');
+        var new_html = `
+          <span class='final_tag' id='new_final_tag${the_id}'>
+            ${$(this).text()}
+          </span>
+        `;
+        $('#tag_place'+tag_counter.toString()).html(new_html);
+        $('#new_final_tag'+the_id).css('background-color', $(this).css('background-color'));
+        $('#tag'+the_id).remove();
 
+        if ($('.tag_listing').text().match('^\\s+$')){
+          $('.tag_listing').html('<p class="no_tag_listings"><i>No tags available</i></p>');
+        }
+        tag_counter += 1;
+      }
+
+
+    });
+    $('.transcripts').on('click', '.final_tag', function(){
+      var the_id = this.id.match('\\d+');
+      tag_counter -= 1;
+      var new_html = `
+      <span class='post_tag' id = 'tag${the_id}'>${$(this).text()}</span>
+      <div class='spacer' style='height:20px;'></div>
+      `;
+      var current_background = $('#new_final_tag'+the_id).css('background-color');
+      $('#new_final_tag'+the_id).remove();
+      if($('.tag_listing').text().match('No tags available')){
+        $('.tag_listing').html(new_html);
+      }
+      else{
+        $('.tag_listing').append(new_html);
+      }
+      $('#tag'+the_id).css('background-color',current_background)
+    });
   });
 
   </script>
 </html>
-
