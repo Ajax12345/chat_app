@@ -144,6 +144,21 @@
   background-color: blue;
   color:white;
 }
+.transcript_header{
+  background-color: #999999;
+  height:auto;
+  width:103.5%;
+  margin-left:-10px;
+  margin-top:-10px;
+  padding-top:10px;
+  padding-bottom:10px;
+  opacity: 0.0;
+}
+.transcript_header:hover{
+  opacity: 1;
+  -webkit-transition: 0.2s; /* Safari */
+  transition: 0.2s;
+}
 .input_region{
   position: absolute;
   width:41%;
@@ -151,6 +166,12 @@
   bottom:0;
   height:130px;
   background-color: #999999;
+  opacity: 0.0
+}
+.input_region:hover{
+  opacity: 1;
+  -webkit-transition: 0.2s; /* Safari */
+  transition: 0.2s;
 }
 .palette_wrapper{
   position: absolute;
@@ -187,6 +208,7 @@
 }
 .color_palette_slider{
   width:390px;
+
 }
 .post_message{
   border-radius: 50px;
@@ -216,6 +238,37 @@
   padding-left:20px;
   padding-right:20px;
   border-radius: 30px;
+}
+.post_tag_search{
+  font-family: 'Fira Sans', sans-serif;
+  font-size:12px;
+  color:white;
+  padding-top:3px;
+  padding-bottom:3px;
+  padding-left:10px;
+  padding-right:10px;
+  border-radius: 30px;
+}
+.post_tag_search:hover{
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:8px;
+  padding-right:8px;
+}
+.post_tag_new{
+  font-family: 'Fira Sans', sans-serif;
+  color:white;
+  padding-top:5px;
+  padding-bottom:5px;
+  padding-left:20px;
+  padding-right:20px;
+  border-radius: 30px;
+}
+.post_tag_new:hover{
+  padding-top:4px;
+  padding-bottom:4px;
+  padding-left:18px;
+  padding-right:18px;
 }
 .post_tag:hover{
   padding-top:4px;
@@ -249,6 +302,102 @@
 .no_tag_listings{
   font-size:15px;
   font-family: 'Fira Sans', sans-serif;
+}
+.search_transcripts{
+  padding-top:5px;
+  padding-left:10px;
+  padding-bottom:5px;
+  padding-right:10px;
+  border:none;
+  border-radius:40px;
+  background-color: blue;
+  color:white;
+}
+.start_private_chat{
+  padding-top:5px;
+  padding-left:10px;
+  padding-bottom:5px;
+  padding-right:10px;
+  border:none;
+  border-radius:40px;
+  background-color: blue;
+  color:white;
+}
+.menu_item_settings{
+  font-size:15px;
+  font-family: 'Fira Sans', sans-serif;
+}
+.full_private_chat_listings{
+  font-family: 'Fira Sans', sans-serif;
+}
+.search_channel{
+  font-family: 'Fira Sans', sans-serif;
+}
+.body_search{
+  font-family: 'Fira Sans', sans-serif;
+}
+#channel_search_keyword{
+  font-family: 'Fira Sans', sans-serif;
+  width:300px;
+  font-size:18px;
+  border-top:none;
+  border-bottom:solid;
+  border-bottom-width:2px;
+  border-bottom-color:blue;
+  border-left:none;
+  border-right:none;
+  padding-left:0px;
+  padding-right:15px;
+  padding-top:7px;
+  padding-bottom:7px;
+
+}
+#channel_search_keyword:focus{
+  outline: none;
+}
+.user_search_for{
+  font-family: 'Fira Sans', sans-serif;
+  width:230px;
+  font-size:14px;
+  border-top:none;
+  border-bottom:solid;
+  border-bottom-width:2px;
+  border-bottom-color:blue;
+  border-left:none;
+  border-right:none;
+  padding-left:0px;
+  padding-right:15px;
+  padding-top:7px;
+  padding-bottom:7px;
+}
+.user_search_for:focus{
+  outline: none;
+}
+.add_user_search{
+  border:none;
+  margin-top: 20px;
+}
+.user_search_listing{
+  font-family: 'Fira Sans', sans-serif;
+  background-color:black;
+  text-decoration-color: black;
+}
+.user_search_listing:hover{
+  text-decoration-color: black;
+}
+.time_posting{
+  width:140px;
+  border:none;
+  border-bottom:solid;
+  border-bottom-width:1.7px;
+  border-bottom-color: blue;
+}
+.time_posting:focus{
+  outline: none;
+}
+.message_username{
+  font-family: 'Fira Sans', sans-serif;
+  margin-left:15px;
 }
 </style>
   <header>
@@ -340,7 +489,17 @@
     <div class='container'>
         <div class='row'>
           <div class='col'>
-            <button class='room_settings'><i class="fas fa-cog" style='color:white;font-size:1.6em;'></i></button>
+            <div class="btn-group dropup">
+              <button class='room_settings' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-cog" style='color:white;font-size:1.6em;'></i></button>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#"><span class='menu_item_settings'><i class="fas fa-adjust"></i>  Toggle Themes</span></a>
+                <button type="button" class="btn btn-link dropdown-item menu_item_settings" data-toggle="modal" data-target="#channelRules"><i class="fas fa-gavel"></i>  Channel Rules</button>
+                <button type="button" class="btn btn-link dropdown-item menu_item_settings" data-toggle="modal" data-target="#channelDescription"><i class="fas fa-info-circle"></i> Channel Description</button>
+                <button type="button" class="btn btn-link dropdown-item lock_input_box menu_item_settings"><i class="fas fa-lock-open"></i>  Display Input Box</button>
+                <a class="dropdown-item" href="#"><span class='menu_item_settings'><i class="fas fa-upload"></i> Export Transcript to CSV</span></a>
+              </div>
+            </div>
+
           </div>
           <div class='col'>
 
@@ -359,27 +518,204 @@
     </div>
   </div>
   </div>
+  <!---rules modal--->
+  <div class="modal" id="channelRules" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style='border-bottom:none;'>
+        <h5 class="modal-title" id="exampleModalLabel">Channel Rules</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+
+    </div>
+  </div>
+</div>
+  <!------>
+  <!---Description modal--->
+  <div class="modal" id="channelDescription" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style='border-bottom:none;'>
+        <h5 class="modal-title" id="exampleModalLabel">Channel Description</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+
+    </div>
+  </div>
+</div>
+  <!------>
   <div class="column transcripts" style="background-color:#E4E6E6;">
     <!--IDEA: have owners define valid tags to add to transcript-->
-    <div class='palette_wrapper'>
+    <div class='transcript_header'>
       <div class='container'>
         <div class='row'>
+          <div class='col'><button class='search_transcripts' data-toggle="modal" data-target="#searchChannel">Search</button></div>
           <div class='col'></div>
           <div class='col'>
-            <div class='valid_tags'></div>
-            <div class='palette' style='margin-left:24px;'></div>
+            <div class="dropdown show">
+            <button class='start_private_chat' id="private_chats" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Private Chat</button>
+            <div class="dropdown-menu full_private_chat_listings" aria-labelledby="private_chats">
+              <a class="dropdown-item" href="#">Current:<strong> #TestChannel main</strong></a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#"><strong>#TestChannel: </strong>@Jpetullo</a>
+              <a class="dropdown-item" href="#"><strong>#TestChannel: </strong>@JoePetullo</a>
+              <a class="dropdown-item" href="#"><strong>#TestChannel: </strong>@Ajax1234</a>
+            </div>
+
           </div>
-          <div class='col'></div>
+          </div>
         </div>
       </div>
     </div>
+    <!--message listing here-->
+    <div class='spacer' style='height:20px;'></div>
+    <div class='message'>
+      <table>
+        <tr>
+          <td>
+            <div class='message_avatar' style="background-image:url('https://www.gravatar.com/avatar/93c3d25651e909d195e81fdb3670a017?d=identicon');width:50px;height:50px;background-size:cover;border-radius:10px;"></div>
+
+          </td>
+          <td>
+            <div class='container'>
+              <div class='row'>
+                <div class='col'>
+                  <p><strong class='message_username'>Ajax1234</strong></p>
+                </div>
+                <div class='col-md-auto'><p>Today, at 11:55 PM</p></div>
+              </div>
+            </div>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!--Search Channel Modal-->
+    <div class="modal" id="searchChannel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style='border-bottom:none'>
+        <h5 class="modal-title" id="exampleModalLabel"><span class='search_channel'>Search transcripts of <strong>#TestChannel</strong></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body body_search">
+        <input type='text' name='search_keywords' id='channel_search_keyword' placeholder="Keywords">
+        <div class='spacer' style='height:20px'></div>
+        <p><strong>Posted by:</strong></p>
+
+        <table style='margin-left:50px;' id='search_options'>
+            <tr id = 'me_search'>
+              <td>
+                <p>@me:</p>
+              </td>
+              <td>
+                <input type="checkbox" id='current_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+              </td>
+            </tr>
+            <tr id='other_search'>
+              <td>
+                <p>other users:</p>
+              </td>
+              <td>
+                <input type="checkbox" id='other_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+              </td>
+            </tr>
+            <tr id='all_search'>
+              <td>
+                <p>all:</p>
+              </td>
+              <td>
+                <input type="checkbox" id='all_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+              </td>
+            </tr>
+        </table>
+        <div class='spacer' style='height:20px;'></div>
+        <div class='container'>
+          <div class='row'>
+            <div class='col'><strong>from:</strong></div>
+            <div class='col'><input type='text' id='from_time_posting' class='time_posting' placeholder='m/d/y at h:m:s' value='7/26/2018 at 15:59:32'></div>
+            <div class='col'><strong>to:</strong></div>
+            <div class='col'><input type='text' id='to_time_posting' class='time_posting' placeholder='m/d/y at h:m:s' value='Current'></div>
+          </div>
+        </div>
+        <div class='spacer' style='height:20px;'></div>
+        <div class='container'>
+          <div class='row'>
+            <div class='col'><p>Tags: </p></div>
+            <div class='col'>
+              <div class="btn-group dropup">
+                <button type="button" class="dropdown tag_input" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='margin-left:-60px;'>
+                  (Select)
+                </button>
+                <div class="dropdown-menu tag_listing" style='text-align:center' id='tags_for_searching'>
+                  <div class='spacer' style='height:10px;'></div>
+                  <span class='post_tag_new' id='searchtag1' style='background-color:red'>New event</span>
+                  <div class='spacer' style='height:20px;'></div>
+                  <span class='post_tag_new' id ='searchtag2' style='background-color:#F1921E'>Announcment</span>
+                  <div class='spacer' style='height:20px;'></div>
+                  <span class='post_tag_new' id = 'searchtag3' style='background-color:purple'>Product release</span>
+                  <div class='spacer' style='height:20px;'></div>
+
+                </div>
+              </div>
+            </div>
+            <div class='col'></div>
+            <div class='col'></div>
+          </div>
+        </div>
+        <div class='spacer' style='height:20px;'></div>
+        <div class='container'>
+          <div class='row'>
+            <div class='col' id='new_tag1'></div>
+            <div class='col' id='new_tag2'></div>
+            <div class='col' id='new_tag3'></div>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer" style='border-top:none'>
+        <button type="button" class="btn btn-primary">Search</button>
+      </div>
+    </div>
+  </div>
+</div>
+    <!----->
+
+    <div class='input_region_wrapper'>
+
     <div class='input_region'>
+      <div class='palette_wrapper'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col'></div>
+            <div class='col'>
+              <div class='valid_tags'></div>
+              <div class='palette' style='margin-left:24px;'></div>
+            </div>
+            <div class='col'></div>
+          </div>
+        </div>
+      </div>
       <div class='container'>
 
         <div class='row'>
           <div class='col'>
             <div class='spacer' style='height:8px;'></div>
-            <button class='fonts_and_styles'><i class="fas fa-pencil-alt" id='color_marker' style='font-size:1.3em;color:black;'></i></button>
+            <button class='fonts_and_styles'><i class="fas fa-paint-brush" id='color_marker' style='font-size:1.3em;color:black;'></i></button>
             <div class='spacer' style='height:15px;'></div>
             <!--<button class='tag_input' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-tag" style='font-size:1.3em'></i></button>-->
             <div class="btn-group dropup">
@@ -420,6 +756,7 @@
       </div>
 
     </div>
+  </div>
     <!--Tag popup--->
     <div class="modal" id="validTags" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -529,6 +866,7 @@
       }
     });
     var flag = false
+    /*
     $('.outer-pannel').on('click', '.room_settings', function(){
       var pannel_html = `
         <div class='user_menu'>
@@ -551,10 +889,12 @@
         flag = false
       }
     });
+    */
     var palette_loaded = false;
     $('.transcripts').on('click', '.fonts_and_styles', function(){
       if (palette_loaded){
         $('.palette').html('');
+
         palette_loaded = false;
       }
       else{
@@ -566,6 +906,7 @@
         `;
         palette_loaded = true;
         $('.palette').html(color_palette);
+
       }
     });
     $('.transcripts').on("input change", '.color_palette_slider', function(){
@@ -585,6 +926,7 @@
     });
     var tag_counter = 1;
     $('.transcripts').on('click', '.post_tag', function(){
+      $('.input_region').css('opacity', 1);
       if (tag_counter < 4){
         var the_id = this.id.match('\\d+');
         var new_html = `
@@ -618,6 +960,201 @@
       }
       $('#tag'+the_id).css('background-color',current_background)
     });
+    $('.outer-pannel').on('click', '.lock_input_box', function(){
+      if ($(this).text().match('Display Input Box')){
+        $('.input_region').css('opacity', 1);
+        $(this).html('<i class="fas fa-lock"></i>  Hide Input Box');
+      }
+      else{
+        $('.input_region').css('opacity', 0);
+        $(this).html('<i class="fas fa-lock-open"></i>  Display Input Box');
+      }
+
+
+    });
+    var me_search_flag = false;
+    $('.transcripts').on('change', '#me_search', function(){
+        if (!me_search_flag){
+          $("#other_search").remove();
+          $("#all_search").remove();
+          me_search_flag = true;
+        }
+        else{
+          var the_html =`
+          <tr id='other_search'>
+            <td>
+              <p>other users:</p>
+            </td>
+            <td>
+              <input type="checkbox" id='other_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+            </td>
+          </tr>
+          <tr id='all_search'>
+            <td>
+              <p>all messages:</p>
+            </td>
+            <td>
+              <input type="checkbox" id='all_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+            </td>
+          </tr>
+          `;
+          $('#search_options').append(the_html);
+          me_search_flag = false;
+        }
+
+    });
+    var all_search_flag = false;
+    $('.transcripts').on('change', '#all_search', function(){
+      if(!all_search_flag){
+        $('#me_search').remove();
+        $('#other_search').remove();
+        all_search_flag = true;
+      }
+      else{
+        $('#search_options').html('');
+        var the_html = `
+        <tr id = 'me_search'>
+          <td>
+            <p>@me:</p>
+          </td>
+          <td>
+            <input type="checkbox" id='current_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+          </td>
+        </tr>
+        <tr id='other_search'>
+          <td>
+            <p>other users:</p>
+          </td>
+          <td>
+            <input type="checkbox" id='other_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+          </td>
+        </tr>
+        <tr id='all_search'>
+          <td>
+            <p>all messages:</p>
+          </td>
+          <td>
+            <input type="checkbox" id='all_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+          </td>
+        </tr>
+        `;
+        $("#search_options").html(the_html);
+        all_search_flag = false;
+      }
+    });
+    var other_search_flag = false;
+    $('.transcripts').on('change', '#other_search', function(){
+       if (!other_search_flag){
+         $('#me_search').remove();
+         $('#all_search').remove();
+         other_search_flag = true;
+         //<div class='user_avatar' style="background-image:url(/static/{{current.avatar}});width:25px;height:25px;background-size:cover;border-radius:50%;"></div>
+         //<button type="button" class="btn btn-link dropdown-item lock_input_box menu_item_settings">  <strong>@Ajax1234</strong></button>
+         var the_html = `
+         <div class='spacer' style='height:20px;'></div>
+         <div class='container'>
+          <div class='row'>
+            <div class='col'>
+              <input type='text' class='user_search_for' id='user_username_listing' placeholder='Usernames...'>
+            </div>
+            <div class='col'>
+            <div class="btn-group dropup">
+              <button type="button" class="dropdown add_user_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style='border:none;background-color:white'>
+                <i class="fas fa-user-plus" style='color:black;'></i>
+              </button>
+              <div class="dropdown-menu">
+                <table>
+                  <tr>
+                    <td><div class='user_avatar' style="background-image:url(/static/{{current.avatar}});width:30px;height:30px;background-size:cover;border-radius:50%;margin-left:10px;"></div></td>
+                    <td><button type="button" class="btn btn-link dropdown-item lock_input_box menu_item_settings" id='custom_user_search'>  <strong>@Ajax1234</strong></button></td>
+                  </tr>
+                </table>
+
+              </div>
+              </div>
+              </div>
+            </div>
+            </div>
+
+         `;
+         $('#search_options').append(the_html);
+
+       }
+       else{
+         var the_html = `
+         <tr id = 'me_search'>
+           <td>
+             <p>@me:</p>
+           </td>
+           <td>
+             <input type="checkbox" id='current_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+           </td>
+         </tr>
+         <tr id='other_search'>
+           <td>
+             <p>other users:</p>
+           </td>
+           <td>
+             <input type="checkbox" id='other_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+           </td>
+         </tr>
+         <tr id='all_search'>
+           <td>
+             <p>all messages:</p>
+           </td>
+           <td>
+             <input type="checkbox" id='all_user_search' class='search_checkbox' style='margin-top:-12px;margin-left:5px;'>
+           </td>
+         </tr>
+         `;
+         $("#search_options").html(the_html);
+         other_search_flag = false;
+       }
+    });
+    $('.transcripts').on('click', '#custom_user_search', function(){
+      if($('.user_search_for').val() == ''){
+        $('.user_search_for').val($(this).text());
+      }
+      else{
+        $('.user_search_for').val($('.user_search_for').val()+','+$(this).text());
+      }
+
+    });
+    var search_tag_counter = 1;
+    $('.transcripts').on('click', '.post_tag_new', function(){
+
+      if (search_tag_counter < 4){
+        the_id = this.id.match('\\d+');
+        var new_html = `
+        <span class='post_tag_search' id = 'the_search_tag${the_id}'>${$(this).text()}</span>
+        `;
+        $('#searchtag'+the_id).remove();
+        search_tag_counter += 1;
+        $('#new_tag'+the_id).html(new_html);
+        $('#the_search_tag'+the_id).css('background-color', $(this).css('background-color'));
+        if ($('#tags_for_searching').text().match('^\\s+$')){
+          $('#tags_for_searching').html('<p class="no_tag_listings"><i>No tags available</i></p>')
+        }
+      }
+
+    });
+    $('.transcripts').on('click', '.post_tag_search', function(){
+      var the_id = this.id.match('\\d+');
+      search_tag_counter -= 1;
+      if ($('#tags_for_searching').text().match('No tags available')){
+        $('#tags_for_searching').html('');
+      }
+      var new_html = `
+      <span class='post_tag_new' id='searchtag${the_id}'>${$(this).text()}</span>
+      <div class='spacer' style='height:20px;'></div>
+      `;
+
+      var backgroundcolor = $(this).css('background-color');
+      $('#the_search_tag'+the_id).remove();
+      $('#tags_for_searching').append(new_html);
+      $('#searchtag'+the_id).css('background-color', backgroundcolor)
+    });
+    //https://www.gravatar.com/avatar/93c3d25651e909d195e81fdb3670a017?d=identicon
   });
   </script>
 </html>
