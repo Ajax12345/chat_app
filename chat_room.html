@@ -270,6 +270,17 @@
   padding-left:18px;
   padding-right:18px;
 }
+.message_tag_object{
+  font-family: 'Fira Sans', sans-serif;
+  color:white;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:8px;
+  padding-right:8px;
+  border-radius: 30px;
+  font-size:12px;
+}
+
 .post_tag:hover{
   padding-top:4px;
   padding-bottom:4px;
@@ -431,7 +442,7 @@ box-shadow: 10px 6px 30px -8px rgba(0,0,0,0.75);
 }
 .message_text{
   font-family: 'Fira Sans', sans-serif;
-  font-size:15px;
+  font-size:1rem;
   margin-left:7px;
   margin-top:4px;
   overflow-wrap: break-word;
@@ -655,7 +666,17 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
                   <div class='message_text_container1' style='line-height: 1.6;'>
                     <p class='message_text' id='message_info1'>Hey there, thanks for checking us out. Using this for testing, although soon you will be able to post yourself</p>
                   </div>
-
+                   <!--If message is not tagged, this line is not needed-->
+                  <div class='message_tag_wrapper' style='margin:0 auto;'>
+                    <table style='margin-left:10px;'>
+                      <tr>
+                        <td class='message_tag_slot' id = 'message1_tag_slot1'><span class="message_tag_object" id="message1_searchtag1" style="background-color:red">New event</span></td>
+                        <td class='message_tag_slot' id = 'message1_tag_slot2'><span class="message_tag_object" id="message1_searchtag2" style="background-color:#F1921E">Announcment</span></td>
+                        <td class='message_tag_slot' id = 'message1_tag_slot3'><span class="message_tag_object" id="message1_searchtag3" style="background-color:purple">Product release</span></td>
+                      </tr>
+                    </table>
+                  </div>
+                  <div class='spacer' style='height:10px;'></div>
                 </div>
                 <div class='container'>
                   <div class='row'>
@@ -1258,13 +1279,30 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
     $('.transcripts').on('click', '.tool_rack_button', function(){
       var the_id = this.id.match('\\d+');
       if (this.id.startsWith('edit')){
-        //message_info1
-        var message_text = $("#message_info"+the_id).text()
-        var input_html = `
+        if ($(this).html().match('fa\\-upload')){
+          var new_text = $('#edited_message'+the_id).val();
+          var new_html = `
+            <p class='message_text' id='message_info${the_id}'>${new_text}</p>
+          `;
+          $('.message_text_container'+the_id).html(new_html);
+          $('#edit_message'+the_id).html("<i class='fas fa-pencil-alt' style='font-size:0.8em;'></i>");
+        }
+        else{
+          var message_text = $("#message_info"+the_id).text()
+          var input_html = `
 
-          <textarea class="form-control edit_message_box" aria-label="With textarea" id='edited_message${the_id}' style='width:430px;margin:0 auto;font-family:"Fira Sans", sans-serif;'>${message_text}</textarea>
-        `;
-        $('.message_text_container'+the_id).html(input_html);
+            <textarea class="form-control edit_message_box" aria-label="With textarea" id='edited_message${the_id}' style='width:430px;margin:0 auto;font-family:"Fira Sans", sans-serif;'>${message_text}</textarea>
+            <div class='spacer' style='height:10px;'></div>
+          `;
+          $('.message_text_container'+the_id).html(input_html);
+          $('#edit_message'+the_id).html('<i class="fas fa-upload" style="font-size:0.8em;"></i>');
+
+
+
+        }
+
+        //message_info1
+
       }
     });
   });
