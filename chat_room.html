@@ -24,7 +24,7 @@
 }
 .transcripts{
   width:40%;
-  height:100%;
+  min-height: 100%;
 }
 .boxes{
   width:37%;
@@ -464,6 +464,22 @@ box-shadow: 10px 6px 30px -8px rgba(0,0,0,0.75);
 -moz-box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
 box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
 }
+.at_user{
+  border-bottom: 1px dotted #ABABAB;
+    text-decoration: none;
+    color:#ABABAB;
+
+}
+.at_user1{
+  padding-top:1px;
+  padding-bottom:1px;
+  padding-left:5px;
+  padding-right:5px;
+  border-radius:30px;
+  background-color: #C6C6C6;
+
+
+}
 </style>
   <header>
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans|Sunflower:300" rel="stylesheet">
@@ -646,15 +662,15 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
     <!--message listing here-->
     <div class='spacer' style='height:20px;'></div>
     <div class='messages' style='margin-top:-60px;'>
-    <div class='message' style='margin-top:5px;'>
+    <div class='message' style='margin-top:40px;'>
       <table>
         <tr>
-          <td>
+          <td style='position:absolute'>
             <div class='message_avatar' style="background-image:url('https://www.gravatar.com/avatar/93c3d25651e909d195e81fdb3670a017?d=identicon');width:70px;height:70px;background-size:cover;border-radius:50%;"></div>
 
           </td>
-          <td>
-            <div class='container' style='margin-top:130px;'>
+          <td styl='heigth:auto;'>
+            <div class='container' style='margin-top:20px;margin-left:70px;'>
               <div class='row'>
                 <div class='col'>
                   <p><strong class='message_username'><a href='/user/1' style='color:black;'>Ajax1234</a></strong></p>
@@ -664,7 +680,10 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
                 <div class='message_body' id='testChannelMessage1' style='margin-left:-2px;'>
                   <button class='message_menu' id='menu_for1'><i class="fas fa-ellipsis-h"></i></button>
                   <div class='message_text_container1' style='line-height: 1.6;'>
-                    <p class='message_text' id='message_info1'>Hey there, thanks for checking us out. Using this for testing, although soon you will be able to post yourself</p>
+                    <p class='message_text' id='message_info1'>
+                      <span class='at_user'>@Ajax1234</span>
+                      check this out
+                    </p>
                   </div>
                    <!--If message is not tagged, this line is not needed-->
                   <div class='message_tag_wrapper' style='margin:0 auto;'>
@@ -683,7 +702,7 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
                     <div class='col-md-auto' id='message1_tools'></div>
                     <div class='col'></div>
                     <div class='col-md-auto'>
-                      <p class='message_date' style='margin-top:5px;margin-right:20px;'>Today, at 11:55 PM</p>
+                      <p class='message_date' style='margin-top:5px;margin-right:100px;'>Today, at 11:55 PM</p>
                     </div>
                   </div>
                 </div>
@@ -1281,11 +1300,19 @@ box-shadow: 5px 12px 31px -8px rgba(0,0,0,0.75);
       if (this.id.startsWith('edit')){
         if ($(this).html().match('fa\\-upload')){
           var new_text = $('#edited_message'+the_id).val();
-          var new_html = `
-            <p class='message_text' id='message_info${the_id}'>${new_text}</p>
-          `;
-          $('.message_text_container'+the_id).html(new_html);
-          $('#edit_message'+the_id).html("<i class='fas fa-pencil-alt' style='font-size:0.8em;'></i>");
+          if (new_text == ''){
+            $('#edited_message'+the_id).css('border', 'solid');
+            $('#edited_message'+the_id).css('border-width', '1');
+            $('#edited_message'+the_id).css('border-color', 'red');
+          }
+          else{
+            var new_html = `
+              <p class='message_text' id='message_info${the_id}'>${new_text}</p>
+            `;
+            $('.message_text_container'+the_id).html(new_html);
+            $('#edit_message'+the_id).html("<i class='fas fa-pencil-alt' style='font-size:0.8em;'></i>");
+          }
+
         }
         else{
           var message_text = $("#message_info"+the_id).text()
